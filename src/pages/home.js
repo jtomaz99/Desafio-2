@@ -19,8 +19,24 @@ export default class HomeDeslogado extends Component {
         );
     }
 
-    numberOfLikes(){
-        
+    getNumberOfLikes(id_post){
+        var likes = 0;
+        Data.comments.forEach(function(element){
+            if (element.post == id_post){
+                likes += 1;
+            }
+        });
+        return likes;
+    }
+
+    getCategory(id_post_category){
+        var category_name;
+        Data.categories.forEach(function(element){
+            if (element.id == id_post_category){
+                category_name = element.name;
+            }
+        });
+        return category_name;
     }
 
 
@@ -43,10 +59,11 @@ export default class HomeDeslogado extends Component {
                                     <div class="card-body">
                                         <h5 class="card-title">{element.title}</h5>
                                         <p class="card-text">{element.body}</p>
+                                        <span class="badge bg-info">#{this.getCategory(element.category)}</span>
                                     </div>
                                     <div class="card-footer likes">
                                         <div>
-                                            <i class="far fa-heart text-muted"> 28</i>
+                                            <i class="far fa-heart text-muted"> {this.getNumberOfLikes(element.id)}</i>
                                         </div>
                                         <div>
                                             <small class="text-muted">Posted at {element.postedAt}</small>
