@@ -117,6 +117,9 @@ export default class Home extends Component {
                                                             return(
                                                                 <div>
                                                                     <span className="badge category-comments">
+                                                                        <div className="profile-photo-comments">
+                                                                            <img src={this.getProfile(v.author).picture} class="card-img-top" alt="..."></img>
+                                                                        </div>
                                                                         <div>{this.getProfile(v.author).name}:</div>
                                                                         <div className="comment-body">{v.content}</div>
                                                                     </span>
