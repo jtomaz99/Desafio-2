@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Data from '../data/database.json';
 
 import './home.css';
+import Profile from './profile';
 
 export default class Home extends Component {
     constructor() {
@@ -73,6 +74,13 @@ export default class Home extends Component {
     render () {
         return(
             <div>
+                <nav className="navbar navbar-dark bg-dark">
+                    <div className="container">
+                        <a className="navbar-brand" href="/">
+                            Sociops
+                        </a>
+                    </div>
+                </nav>
                 <div className="row row-cols-1 row-cols-md-3 g-4 cards mt-3">
                     {Data.posts.sort((a, b) => Date.parse(new Date(b.postedAt.split('/').reverse().join("-"))) - Date.parse(new Date(a.postedAt.split('/').reverse().join("-")))).map(element => {
                         return(
@@ -83,7 +91,7 @@ export default class Home extends Component {
                                             <img src={this.getProfile(element.postedBy).picture} class="card-img-top" alt="..."></img>
                                         </div>
                                         <div className="username">
-                                            <span className="text-muted">{this.getProfile(element.postedBy).name}</span>
+                                            <a href="/profile" className="btn text-muted">{this.getProfile(element.postedBy).name}</a>
                                         </div>
                                     </div>
                                     <div className="card-body">
