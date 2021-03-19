@@ -110,7 +110,7 @@ export default class Home extends Component {
                                             </div>
                                         </div>
                                         <div className="comments">
-                                                {Data.comments.map(v =>{
+                                                {Data.comments.sort((a, b) => Date.parse(new Date(b.postedAt.split('/').reverse().join("-"))) - Date.parse(new Date(a.postedAt.split('/').reverse().join("-")))).map(v =>{
                                                     var commentsId = this.getCommentsId(element.id)
                                                     for (var i = 0; i < commentsId.length; i++){
                                                         if (v.id == commentsId[i]){
