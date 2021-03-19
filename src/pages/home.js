@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Data from '../data/database.json';
 
 import './home.css';
-import Profile from './profile';
+import Articles from './articles';
 
 export default class Home extends Component {
     constructor() {
@@ -96,6 +96,7 @@ export default class Home extends Component {
                                     </div>
                                     <div className="card-body">
                                         <h5 className="card-title">{element.title}</h5>
+                                        <Articles postId={element.id} user={this.getProfile(element.postedBy).id}/>
                                         <p className="card-text">{element.body}</p>
                                         {this.getCategory(element.category)}
                                     </div>
