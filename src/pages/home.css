@@ -1,11 +1,15 @@
+body{
+    background: linear-gradient(#00bfff, #e0ffff);
+}
+
 .profile-photo{
     border-radius: 50%;
     width: 70px;
     height: 70px;
     overflow: hidden;
     position: relative;
-    margin-top: 5px; 
-    margin-left: 5px;
+    margin-top: 18px; 
+    margin-left: 10px;
 }
 
 .profile-photo img{
@@ -26,9 +30,46 @@
 
 .username{
     margin-left: 2%;
+    margin-top: 15px;
 }
 
 .likes{
     display: flex;
     justify-content: space-between;
+}
+
+.category-dark-blue{
+    background-color: #202A44;
+}
+
+.category-light-blue{
+    background-color: #009CDE;
+}
+
+.category-grassland-green{
+    background-color: #97D700;
+}
+
+.category-orange{
+    background-color: #ED8B00;
+}
+
+.category-comments{
+    background-color: #ccced2;
+    color: #000000;
+}
+
+.card-title a{
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+.comments span{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.comment-body{
+    margin-left: 4px;
 }

@@ -3,15 +3,11 @@ import Data from '../data/database.json';
 
 import './home.css';
 
-export default class HomeDeslogado extends Component {
-    constructor(props) {
-        super(props); 
-		this.handleLoginClick = this.handleLoginClick.bind(this);
-    }
-	
-	handleLoginClick(){
-		this.props.history.push("/login");
-	}
+export default class Home extends Component {
+    constructor() {
+        super(); 
+
+    }	
 
     getProfile(id){
         return(
@@ -36,37 +32,90 @@ export default class HomeDeslogado extends Component {
                 category_name = element.name;
             }
         });
+		
+		if (category_name == "Fotos"){
+			return(
+				<span className="badge category-dark-blue">#{category_name}</span>
+			);
+		}
+		
+		if (category_name == "Animais"){
+			return(
+                <span className="badge category-light-blue">#{category_name}</span>
+			);
+		}
+		
+		if (category_name == "Política"){
+			return(
+				<span className="badge category-grassland-green">#{category_name}</span>
+			);
+		}
+		
+		if (category_name == "Outros"){
+			return(
+				<span className="badge category-orange">#{category_name}</span>
+			);
+		}
         return category_name;
+    }
+
+    getCommentsId(id_post){
+        var list_of_comments = [];
+        Data.comments.forEach(function(element){
+            if (element.post == id_post){
+                list_of_comments.push(element.id);
+            }
+        });
+        return list_of_comments;
     }
 
 
     render () {
         return(
             <div>
-                <div class="row row-cols-1 row-cols-md-3 g-4 cards mt-3">
+                <div className="row row-cols-1 row-cols-md-3 g-4 cards mt-3">
                     {Data.posts.sort((a, b) => Date.parse(new Date(b.postedAt.split('/').reverse().join("-"))) - Date.parse(new Date(a.postedAt.split('/').reverse().join("-")))).map(element => {
                         return(
-                            <div class="col">
-                                <div class="card h-100">
-                                    <div class="user-info">
-                                        <div class="profile-photo">
+                            <div className="col">
+                                <div className="card h-100">
+                                    <div className="user-info">
+                                        <div className="profile-photo">
                                             <img src={this.getProfile(element.postedBy).picture} class="card-img-top" alt="..."></img>
                                         </div>
-                                        <div class="username">
-                                            <span class="text-muted">{this.getProfile(element.postedBy).name}</span>
+                                        <div className="username">
+                                            <span className="text-muted">{this.getProfile(element.postedBy).name}</span>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{element.title}</h5>
-                                        <p class="card-text">{element.body}</p>
-                                        <span class="badge bg-info">#{this.getCategory(element.category)}</span>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{element.title}</h5>
+                                        <p className="card-text">{element.body}</p>
+                                        {this.getCategory(element.category)}
                                     </div>
-                                    <div class="card-footer likes">
-                                        <div>
-                                            <i class="far fa-heart text-muted"> {this.getNumberOfLikes(element.id)}</i>
+                                    <div>
+                                        <div className="card-footer likes">
+                                            <div>
+                                                <i className="far fa-heart text-muted"> {this.getNumberOfLikes(element.id)}</i>
+                                            </div>
+                                            <div>
+                                                <small className="text-muted">Posted at {element.postedAt}</small>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <small class="text-muted">Posted at {element.postedAt}</small>
+                                        <div className="comments">
+                                                {Data.comments.map(v =>{
+                                                    var commentsId = this.getCommentsId(element.id)
+                                                    for (var i = 0; i < commentsId.length; i++){
+                                                        if (v.id == commentsId[i]){
+                                                            return(
+                                                                <div>
+                                                                    <span className="badge category-comments">
+                                                                        <div>{this.getProfile(v.author).name}:</div>
+                                                                        <div className="comment-body">{v.content}</div>
+                                                                    </span>
+                                                                </div>
+                                                            );
+                                                        }
+                                                    }
+                                                })}
                                         </div>
                                     </div>
                                 </div>
