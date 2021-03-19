@@ -3,6 +3,7 @@ import Data from '../data/database.json';
 import $ from 'jquery'
 
 import './home.css';
+import './articles.css';
 
 
 export default class Articles extends Component {
@@ -60,7 +61,7 @@ export default class Articles extends Component {
         const {postIdentifier, userId} = this.state;
         return(
             <div>
-                <span className="btn btn-sm bagde bg-info" data-bs-toggle="modal" data-bs-target="#modalArticles" onClick={() => { this.loadArticleModal(postIdentifier, userId) }}>Expandir</span>
+                <span className="btn btn-sm bagde span-expantion" data-bs-toggle="modal" data-bs-target="#modalArticles" onClick={() => { this.loadArticleModal(postIdentifier, userId) }}>Expandir</span>
 
                 <div className="modal fade" id="modalArticles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-fullscreen">
